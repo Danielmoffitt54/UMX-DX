@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/UMX-DX/static/css/main.dc211183.chunk.css",
-    "main.js": "/UMX-DX/static/js/main.d0b3d25e.chunk.js",
-    "main.js.map": "/UMX-DX/static/js/main.d0b3d25e.chunk.js.map",
-    "runtime-main.js": "/UMX-DX/static/js/runtime-main.4b513f39.js",
-    "runtime-main.js.map": "/UMX-DX/static/js/runtime-main.4b513f39.js.map",
-    "static/js/2.82b3a25c.chunk.js": "/UMX-DX/static/js/2.82b3a25c.chunk.js",
-    "static/js/2.82b3a25c.chunk.js.map": "/UMX-DX/static/js/2.82b3a25c.chunk.js.map",
-    "static/js/3.9df49c18.chunk.js": "/UMX-DX/static/js/3.9df49c18.chunk.js",
-    "static/js/3.9df49c18.chunk.js.map": "/UMX-DX/static/js/3.9df49c18.chunk.js.map",
+    "main.js": "/UMX-DX/static/js/main.e9794297.chunk.js",
+    "main.js.map": "/UMX-DX/static/js/main.e9794297.chunk.js.map",
+    "runtime-main.js": "/UMX-DX/static/js/runtime-main.55769f23.js",
+    "runtime-main.js.map": "/UMX-DX/static/js/runtime-main.55769f23.js.map",
+    "static/js/2.1416d59d.chunk.js": "/UMX-DX/static/js/2.1416d59d.chunk.js",
+    "static/js/2.1416d59d.chunk.js.map": "/UMX-DX/static/js/2.1416d59d.chunk.js.map",
+    "static/js/3.92accba2.chunk.js": "/UMX-DX/static/js/3.92accba2.chunk.js",
+    "static/js/3.92accba2.chunk.js.map": "/UMX-DX/static/js/3.92accba2.chunk.js.map",
     "index.html": "/UMX-DX/index.html",
     "static/css/main.dc211183.chunk.css.map": "/UMX-DX/static/css/main.dc211183.chunk.css.map",
-    "static/js/2.82b3a25c.chunk.js.LICENSE.txt": "/UMX-DX/static/js/2.82b3a25c.chunk.js.LICENSE.txt"
+    "static/js/2.1416d59d.chunk.js.LICENSE.txt": "/UMX-DX/static/js/2.1416d59d.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.4b513f39.js",
-    "static/js/2.82b3a25c.chunk.js",
+    "static/js/runtime-main.55769f23.js",
+    "static/js/2.1416d59d.chunk.js",
     "static/css/main.dc211183.chunk.css",
-    "static/js/main.d0b3d25e.chunk.js"
+    "static/js/main.e9794297.chunk.js"
   ]
 }

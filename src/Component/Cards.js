@@ -1,19 +1,24 @@
 import { NavLink } from 'react-router-dom';
+import {
+    Container,
+    Card
+} from 'react-bootstrap';
 
 const Cards = (props) => {
 
-    return <div className="App-Cards">
+    return <Container>
         {props.AllOptions.map((option, i) => {
-            return <NavLink key={i} 
-                to={option.path}
-                className="Card"
-                onClick={() => props.RedirectRoute({
-                    option: option,
-                    index: i
-                })}
-            >{option.label}</NavLink>
+            return <Card>
+                <NavLink key={i} 
+                    to={option.path}
+                    onClick={() => props.RedirectRoute({
+                        option: option,
+                        index: i
+                    })}
+                >{option.label}</NavLink>
+            </Card>
         })}
-    </div>
+    </Container>
 }
 
 export default Cards;

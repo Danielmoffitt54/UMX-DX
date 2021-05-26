@@ -24,67 +24,16 @@ body {
   justify-content: center;
 }
 
-/* iframe {
-  width: 100%;
-  min-height: 50vh;
-  border: 2px solid silver;
-  border-radius: 8px;
-} */
-
-/* Header and Table Footer Styling */
-.App-Header {
-  border-bottom: 2px solid goldenrod;
-}
-
-.Header-Main {
-  height: 125px;
-  margin: 0 18vw;
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-}
-.Header-Subheader, .Footer-Nav {
-  background-color: #FAFAFA;
-}
-
-.Header-Nav {
-  display: flex;
-}
-.Subheader-Nav, .Footer-Nav {
+/* Table Footer Styling */
+.Footer-Nav {
   margin: 0;
   padding: 0 18vw;
   display: flex;
-}
-.Subheader-Nav {
-  justify-content: center;
-}
-.Footer-Nav {
   justify-content: space-around;
+  background-color: #FAFAFA;
 }
 
-.Header-Nav-Dropdown {
-  position: fixed;
-  top: 125px;
-  display: flex;
-  flex-direction: column;
-  background-color: #F5F5F5;
-}
-
-.Header-Link {
-  padding: 5px 10px;
-  font-size: 1.75em;
-  text-decoration: unset;
-  color: #000;
-  background-color: transparent;
-  border: none;
-}
-.Header-Nav-Dropdown-Link {
-  padding: 5px 10px;
-  font-size: 1.5em;
-  color: #000;
-  text-decoration: unset;
-}
-.Subheader-Nav-Link, .Footer-Nav-Link {
+.Footer-Nav-Link {
   padding: 5px 10px;
   color: #00008b;
   background-color: transparent;
@@ -92,30 +41,20 @@ body {
   list-style: none;
 }
 
-.Header-Link:hover, .Header-Nav-Dropdown-Link:hover {
-  color: #daa520;
-}
-.Subheader-Nav-Link:hover, .Footer-Nav-Link:hover {
+.Footer-Nav-Link:hover {
   color: dimgray;
   cursor: pointer;
 }
 
-.Header-Link-Active, .Header-Nav-Dropdown-Link-Active {
-  color: dimgray;
-}
-.Subheader-Nav-Link-Active {
-  color: #daa520;
-}
-
-.Subheader-Label, .Footer-Label {
+.Footer-Label {
   display: flex;
 }
-.Subheader-Select, .Footer-Input {
+.Footer-Input {
   width: 45px;
   margin: 0 5px;
   text-align: center;
 }
-.Subheader:focus, .Footer-Input:focus {
+.Footer-Input:focus {
   border: none;
 }
 

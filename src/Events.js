@@ -35,7 +35,7 @@ Events.client.ready = (props) => {
                 pageLimit: 0,
                 flat: true
             }).then(res => {
-                props.SetAppState({ Loading: false, Oauth2: client, Patient: res });
+                props.SetAppState({ Loading: false, Oauth2: client, Patient: res[0] });
             }).catch(() => props.SetAppState({ Loading: false }));
         }).catch(() => props.SetAppState({ Loading: false }));
 }
@@ -154,11 +154,11 @@ Events.tbody = {};
 
 Events.tbody.observation = (props) => {
     const issued = new Date(props.entry.issued),
-        report = getSystemValue(getPath(props.entry, "code.coding"), "http://snomed.info/sct", getPath(props.entry, "code.text") || "Report Error"),
-        addReport = getSystemValue(getPath(props.entry ,"valueCodeableConcept.coding"), "http://snomed.info/sct", getPath(props.entry, "valueCodeableConcept.text") || "N/A"),
+        report = Events.value.system(getPath(props.entry, "code.coding"), "http://snomed.info/sct", getPath(props.entry, "code.text") || "Report Error"),
+        addReport = Events.value.system(getPath(props.entry ,"valueCodeableConcept.coding"), "http://snomed.info/sct", getPath(props.entry, "valueCodeableConcept.text") || "N/A"),
         addQty = getPath(props.entry, "valueQuantity.value") || "N/A",
         addUnit = getPath(props.entry, "valueQuantity.unit") || "N/A",
-        absentReport = getSystemValue(getPath(props.entry, "dataAbsentReason.coding"), "http://hl7.org/fhir/data-absent-reason", getPath(props.entry, "dataAbsentReason.text") || "Absent Report");
+        absentReport = Events.value.system(getPath(props.entry, "dataAbsentReason.coding"), "http://hl7.org/fhir/data-absent-reason", getPath(props.entry, "dataAbsentReason.text") || "Absent Report");
 
     let context = addReport;
     if (addQty !== "N/A") context = addQty;
@@ -190,7 +190,7 @@ Events.tbody.condition = (props) => {
 }
 
 Events.tbody.medicationstatement = (props) => {
-    const medication = getSystemValue(getPath(props.entry, "medicationCodeableConcept.coding") || getPath(props.entry, "medicationCodeableConcept.code.coding"), "http://www.nlm.nih.gov/research/umls/rxnorm", getPath(props.entry, "medicationCodeableConcept.text") || "Unnamed Medication(TM)"),
+    const medication = Events.value.system(getPath(props.entry, "medicationCodeableConcept.coding") || getPath(props.entry, "medicationCodeableConcept.code.coding"), "http://www.nlm.nih.gov/research/umls/rxnorm", getPath(props.entry, "medicationCodeableConcept.text") || "Unnamed Medication(TM)"),
         taken = getPath(props.entry, "wasNotTaken") ? "No" : "Yes",
         start = new Date(getPath(props.entry, "effectivePeriod.start")),
         end = new Date(getPath(props.entry, "effectivePeriod.end"));
@@ -207,7 +207,7 @@ Events.tbody.medicationstatement = (props) => {
 }
 
 Events.tbody.allergyintolerance = (props) => {
-    const allergy = getSystemValue(getPath(props.entry, "substance.coding") || getPath(props.entry, "substance.code.coding"), "http://snomed.info/sct", props.entry.substance.text || "Unnamed Allergy"),
+    const allergy = Events.value.system(getPath(props.entry, "substance.coding") || getPath(props.entry, "substance.code.coding"), "http://snomed.info/sct", props.entry.substance.text || "Unnamed Allergy"),
         criticality = props.entry.criticality === "CRITH" ? "High Risk" : "None";
 
     return <tr>
@@ -221,12 +221,12 @@ Events.tbody.allergyintolerance = (props) => {
 }
 
 Events.tbody.patient = (props) => {
-    const maritalStatus = getSystemValue(getPath(props.entry, "maritalStatus.coding") || getPath(props.entry, "maritalStatus.code.coding"), "http://hl7.org/fhir/v3/Marital", props.entry.maritalStatus.text || "Unavailable"),
+    const maritalStatus = Events.value.system(getPath(props.entry, "maritalStatus.coding") || getPath(props.entry, "maritalStatus.code.coding"), "http://hl7.org/fhir/v3/Marital", props.entry.maritalStatus.text || "Unavailable"),
         birthDate = new Date(props.entry.birthDate);
 
     return <tr key={props.index}>
         <td>{props.entry.id || "N/A"}</td>
-        <td>{getPatientName(props.entry.name) || "N/A"}</td>
+        <td>{Events.value.officialName(props.entry.name)}</td>
         <td>{props.entry.gender || "N/A"}</td>
         <td>{birthDate.toDateString() || "N/A"}</td>
         <td>{maritalStatus || "N/A"}</td>
@@ -245,14 +245,25 @@ Events.tbody.relatedperson = (props) => {
 }
 
 // Misc Functions
+Events.value = {};
 
-function getPatientName(name = []) {
-    let entry = name.find(nameRecord => nameRecord.use === "official") || name[0];
-    if (entry) return entry.given.join(" ") + " " + entry.family;
-    return undefined;
+Events.value.capitalize = (str) => {
+    return str[0].toUpperCase() + str.substring(1);
 }
 
-function getSystemValue(array = [], system, str) {
+Events.value.date = (str) => {
+    const date = new Date(str);
+    if (date) return date.toDateString();
+    return str;
+}
+
+Events.value.officialName = (array = []) => {
+    let entry = array.find(arrayRecord => arrayRecord.use === "official") || array[0];
+    if (entry) return entry.given.join(" ") + " " + entry.family;
+    return "N/A";
+}
+
+Events.value.system = (array = [], system, str) => {
     let out = str;
     const checkSys = array.find(c => c.system === system);
     if (checkSys && checkSys.display) {

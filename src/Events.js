@@ -14,15 +14,6 @@ Events.patient = (props) => {
     }).catch(console.error);
 }
 
-Events.provider = (props) => {
-    FHIR.oauth2.authorize({
-        client_id: "4cfb74e7-deb2-4151-9c22-16eba93fd1ec",
-        scope: "user/AllergyIntolerance.read user/Condition.read user/MedicationStatement.read user/Observation.read user/Patient.read user/Person.read user/Practitioner.read user/ProcedureRequest.read launch online_access openid profile",
-        iss: "https://fhir-myrecord.cerner.com/dstu2/ec2458f2-1e24-41c8-b71b-0e701af7583d",
-        redirectUri: "https://danielmoffitt54.github.io/UMX-DX/"
-    }).catch(console.error);
-}
-
 // Client Events
 Events.client = {};
 
@@ -244,7 +235,7 @@ Events.tbody.relatedperson = (props) => {
     </tr>
 }
 
-// Misc Functions
+// Value Events
 Events.value = {};
 
 Events.value.capitalize = (str) => {
@@ -263,8 +254,8 @@ Events.value.officialName = (array = []) => {
     return "N/A";
 }
 
-Events.value.system = (array = [], system, str) => {
-    let out = str;
+Events.value.system = (array = [], system, returnStr) => {
+    let out = returnStr || 'N/A';
     const checkSys = array.find(c => c.system === system);
     if (checkSys && checkSys.display) {
         out = checkSys.display;

@@ -31,7 +31,6 @@ const Header = (props) => {
                     id="navbarScrollingDropdown"
                 >
                     <NavDropdown.Item as={NavLink} to="/launch-patient">Patient</NavDropdown.Item>
-                    <NavDropdown.Item as={NavLink} to="/launch-provider">Provider</NavDropdown.Item>
                 </NavDropdown>
             </Navbar>
         ) : (

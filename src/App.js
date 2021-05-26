@@ -10,7 +10,6 @@ import Header from './Component/Header';
 import Cards from './Component/Cards';
 import Table from './Component/Table';
 import LaunchPatient from './Component/Launch/LaunchPatient';
-import LaunchProvider from './Component/Launch/LaunchProvider';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -54,10 +53,6 @@ export default class App extends React.Component {
           label: "Relatives",
           value: "RelatedPerson",
           path: "/relatives"
-        } , {
-          label: "Care Plan",
-          value: "CarePlan",
-          path: "/care-plan"
         }
       ]
     }
@@ -186,9 +181,6 @@ export default class App extends React.Component {
               <Route path="/launch-patient">
                 <LaunchPatient />
               </Route>
-              <Route path="/launch-provider">
-                <LaunchProvider />
-              </Route> 
             </>
           ) : null }
         </Switch>

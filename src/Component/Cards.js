@@ -1,12 +1,13 @@
 import { NavLink } from 'react-router-dom';
 import {
+    CardDeck,
     Container,
     Card
 } from 'react-bootstrap';
 
 const Cards = (props) => {
 
-    return <Container>
+    return <CardDeck>
         {props.AllOptions.map((option, i) => {
             return <Card>
                 <NavLink key={i} 
@@ -18,7 +19,7 @@ const Cards = (props) => {
                 >{option.label}</NavLink>
             </Card>
         })}
-    </Container>
+    </CardDeck>
 }
 
 export default Cards;

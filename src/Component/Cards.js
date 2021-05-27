@@ -7,7 +7,7 @@ import {
 
 const Cards = (props) => {
 
-    return <CardDeck>
+    return <Container>
         {props.AllOptions.map((option, i) => {
             return <Card>
                 <NavLink key={i} 
@@ -19,7 +19,7 @@ const Cards = (props) => {
                 >{option.label}</NavLink>
             </Card>
         })}
-    </CardDeck>
+    </Container>
 }
 
 export default Cards;

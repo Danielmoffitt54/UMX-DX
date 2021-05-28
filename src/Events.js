@@ -245,7 +245,8 @@ Events.client.request = (props) => {
 Events.main = {};
 
 Events.main.observation = (props) => {
-    const category = Events.dataType.codeableConcept(props.entry.category),
+    const status = Events.value.capitalize(props.entry.status),
+        category = Events.dataType.codeableConcept(props.entry.category),
         code = Events.dataType.codeableConcept(props.entry.code, "http://snomed.info/sct"),
         effective = Events.value.multiValue(props.entry, "effective"),
         issued = Events.dataType.date(props.entry.issued),
@@ -265,31 +266,34 @@ Events.main.observation = (props) => {
             justifyContent: 'space-between',
             alignItems: 'center'
         }}>
-            <Card.Text style={{ margin: '0' }}>{props.entry.resourceType || "N/A"}</Card.Text>
-            <Card.Text style={{ margin: '0' }}>{category || "N/A"}</Card.Text>
-            <Card.Text style={{ margin: '0' }}>{props.entry.status || "N/A"}</Card.Text>
+            {category ? (
+                <Card.Text style={{ margin: '0' }}>{`Observations: ${category}`}</Card.Text>
+            ) : (
+                <Card.Text style={{ margin: '0' }}>Observations</Card.Text>
+            )}
+            <Card.Text style={{ margin: '0' }}>{`Status: ${status || "N/A"}`}</Card.Text>
         </Card.Header>
         <Card.Body 
             as={ListGroup}
             style={{ padding: "0" }}
         >
-            {issued ? <Card.Text as={ListGroupItem}>{`Date Recorded: ${issued}`}</Card.Text> : null }
-            {absent ? <Card.Text as={ListGroupItem}>{`Incomplete Reason: ${absent}`}</Card.Text> : null }
-            {bodySite ? <Card.Text as={ListGroupItem}>{`Location: ${bodySite}`}</Card.Text> : null }
-            {method ? <Card.Text as={ListGroupItem}>{`Method: ${method}`}</Card.Text> : null }
-            {code ? <Card.Text as={ListGroupItem}>{`Report: ${code}`}</Card.Text> : null }
-            {component ? <Card.Text as={ListGroupItem}>{`Report: ${component}`}</Card.Text> : null }
-            {value ? <Card.Text as={ListGroupItem}>{`Value: ${value}`}</Card.Text> : null }
-            {effective ? <Card.Text as={ListGroupItem}>{`Effective: ${effective}`}</Card.Text> : null }
-            {inter ? <Card.Text as={ListGroupItem}>{`Interpretation: ${inter}`}</Card.Text> : null }
-            {refRange ? <Card.Text as={ListGroupItem}>{`Reference: ${refRange}`}</Card.Text> : null }
+            {issued ? <Card.Text as={ListGroupItem} style={{ textAlign: 'left' }}>{`Date Recorded: ${issued}`}</Card.Text> : null }
+            {absent ? <Card.Text as={ListGroupItem} style={{ textAlign: 'left' }}>{`Incomplete Reason: ${absent}`}</Card.Text> : null }
+            {bodySite ? <Card.Text as={ListGroupItem} style={{ textAlign: 'left' }}>{`Location: ${bodySite}`}</Card.Text> : null }
+            {method ? <Card.Text as={ListGroupItem} style={{ textAlign: 'left' }}>{`Method: ${method}`}</Card.Text> : null }
+            {code ? <Card.Text as={ListGroupItem} style={{ textAlign: 'left' }}>{`Report: ${code}`}</Card.Text> : null }
+            {component ? <Card.Text as={ListGroupItem} style={{ textAlign: 'left' }}>{`Report: ${component}`}</Card.Text> : null }
+            {value ? <Card.Text as={ListGroupItem} style={{ textAlign: 'left' }}>{`Value: ${value}`}</Card.Text> : null }
+            {effective ? <Card.Text as={ListGroupItem} style={{ textAlign: 'left' }}>{`Effective: ${effective}`}</Card.Text> : null }
+            {inter ? <Card.Text as={ListGroupItem} style={{ textAlign: 'left' }}>{`Interpretation: ${inter}`}</Card.Text> : null }
+            {refRange ? <Card.Text as={ListGroupItem} style={{ textAlign: 'left' }}>{`Reference: ${refRange}`}</Card.Text> : null }
         </Card.Body>
         {note ? (
             <Card.Footer
                 as={ListGroup}
                 style={{ padding: "0" }}
             >
-                <Card.Text as={ListGroupItem}>{`Side Note: ${note}`}</Card.Text>
+                <Card.Text as={ListGroupItem} style={{ textAlign: 'left' }}>{`Side Note: ${note}`}</Card.Text>
             </Card.Footer>
         ): null }
     </Card>
@@ -297,8 +301,8 @@ Events.main.observation = (props) => {
 
 Events.main.condition = (props) => {
     const category = Events.dataType.codeableConcept(props.entry.category),
-        verStatus = Events.dataType.codeableConcept(props.entry.verificationStatus),
-        clinStatus = Events.dataType.codeableConcept(props.entry.clinicalStatus),
+        verStatus = Events.value.capitalize(props.entry.verificationStatus),
+        clinStatus = Events.value.capitalize(props.entry.clinicalStatus),
         recorded = Events.dataType.date(props.entry.dateRecorded),
         code = Events.dataType.codeableConcept(props.entry.code),
         bodySite = Events.dataType.codeableConcept(props.entry.bodySite),
@@ -315,36 +319,42 @@ Events.main.condition = (props) => {
             justifyContent: 'space-between',
             alignItems: 'center'
         }}>
-            <Card.Text style={{ margin: '0' }}>{props.entry.resourceType || "N/A"}</Card.Text>
-            <Card.Text style={{ margin: '0' }}>{category || "N/A"}</Card.Text>
-            <Card.Text style={{ margin: '0' }}>{verStatus || "N/A"}</Card.Text>
-            <Card.Text style={{ margin: '0' }}>{clinStatus || "N/A"}</Card.Text>
+            {category ? (
+                <Card.Text style={{ margin: '0' }}>{`Conditions: ${category}`}</Card.Text>
+            ) : (
+                <Card.Text style={{ margin: '0' }}>Conditions</Card.Text>
+            )}
+            <div style={{ display: 'flex' }}>
+                <Card.Text style={{ margin: '0' }}>{`Verify: ${verStatus || "N/A"}`}</Card.Text>
+                <Card.Text style={{ margin: '0 0 0 8px' }}>{`Clinical: ${clinStatus || "N/A"}`}</Card.Text>
+            </div>
         </Card.Header>
         <Card.Body 
             as={ListGroup}
             style={{ padding: "0" }}
         >
-            {recorded ? <Card.Text as={ListGroupItem}>{`Date Recorded: ${recorded}`}</Card.Text> : null }
-            {code ? <Card.Text as={ListGroupItem}>{`Report: ${code}`}</Card.Text> : null }
-            {bodySite ? <Card.Text as={ListGroupItem}>{`Location: ${bodySite}`}</Card.Text> : null }
-            {severity ? <Card.Text as={ListGroupItem}>{`Severity: ${severity}`}</Card.Text> : null }
-            {onset ? <Card.Text as={ListGroupItem}>{`Start: ${onset}`}</Card.Text> : null }
-            {abatement ? <Card.Text as={ListGroupItem}>{`End: ${abatement}`}</Card.Text> : null }
+            {recorded ? <Card.Text as={ListGroupItem} style={{ textAlign: 'left' }}>{`Date Recorded: ${recorded}`}</Card.Text> : null }
+            {code ? <Card.Text as={ListGroupItem} style={{ textAlign: 'left' }}>{`Report: ${code}`}</Card.Text> : null }
+            {bodySite ? <Card.Text as={ListGroupItem} style={{ textAlign: 'left' }}>{`Location: ${bodySite}`}</Card.Text> : null }
+            {severity ? <Card.Text as={ListGroupItem} style={{ textAlign: 'left' }}>{`Severity: ${severity}`}</Card.Text> : null }
+            {onset ? <Card.Text as={ListGroupItem} style={{ textAlign: 'left' }}>{`Start: ${onset}`}</Card.Text> : null }
+            {abatement ? <Card.Text as={ListGroupItem} style={{ textAlign: 'left' }}>{`End: ${abatement}`}</Card.Text> : null }
         </Card.Body>
         {summary || evidence ? (
             <Card.Footer
                 as={ListGroup}
                 style={{ padding: "0" }}
             >
-                {summary ? <Card.Text as={ListGroupItem}>{`Summary: ${summary}`}</Card.Text> : null }
-                {evidence ? <Card.Text as={ListGroupItem}>{`Symptoms: ${evidence}`}</Card.Text> : null }
+                {summary ? <Card.Text as={ListGroupItem} style={{ textAlign: 'left' }}>{`Summary: ${summary}`}</Card.Text> : null }
+                {evidence ? <Card.Text as={ListGroupItem} style={{ textAlign: 'left' }}>{`Symptoms: ${evidence}`}</Card.Text> : null }
             </Card.Footer>
         ): null }
     </Card>
 }
 
 Events.main.medicationstatement = (props) => {
-    const medication = Events.dataType.codeableConcept(props.entry.medicationCodeableConcept, "http://www.nlm.nih.gov/research/umls/rxnorm"),
+    const status = Events.value.capitalize(props.entry.status),
+        medication = Events.dataType.codeableConcept(props.entry.medicationCodeableConcept, "http://www.nlm.nih.gov/research/umls/rxnorm"),
         dosage = Events.value.dosage(props.entry.dosage),
         taken = Events.value.wasNotTaken(props.entry.wasNotTaken),
         effperiod = Events.dataType.period(props.entry.effectivePeriod);
@@ -358,25 +368,27 @@ Events.main.medicationstatement = (props) => {
             justifyContent: 'space-between',
             alignItems: 'center'
         }}>
-            <Card.Text style={{ margin: '0' }}>{props.entry.resourceType || "N/A"}</Card.Text>
-            <Card.Text style={{ margin: '0' }}>{props.entry.status || "N/A"}</Card.Text>
+            <Card.Text style={{ margin: '0' }}>Medications</Card.Text>
+            <Card.Text style={{ margin: '0' }}>{`Status: ${status || "N/A"}`}</Card.Text>
         </Card.Header>
         <Card.Body 
             as={ListGroup}
             style={{ padding: "0" }}
         >
-            {medication ? <Card.Text as={ListGroupItem}>{`Medication: ${medication}`}</Card.Text> : null }
+            {medication ? <Card.Text as={ListGroupItem} style={{ textAlign: 'left' }}>{`Name: ${medication}`}</Card.Text> : null }
             {dosage ? dosage.map((dose, i) => {
-                return <Card.Text key={i} as={ListGroupItem}>{"Dosage: " + dose}</Card.Text>
+                return <Card.Text key={i} as={ListGroupItem} style={{ textAlign: 'left' }}>{"Dosage: " + dose}</Card.Text>
             }) : null }
-            {taken ? <Card.Text as={ListGroupItem}>{`Taken: ${taken}`}</Card.Text> : null }
-            {effperiod ? <Card.Text as={ListGroupItem}>{`Period: ${effperiod}`}</Card.Text> : null }
+            {taken ? <Card.Text as={ListGroupItem} style={{ textAlign: 'left' }}>{`Taken: ${taken}`}</Card.Text> : null }
+            {effperiod ? <Card.Text as={ListGroupItem} style={{ textAlign: 'left' }}>{`Period: ${effperiod}`}</Card.Text> : null }
         </Card.Body>
     </Card>
 }
 
 Events.main.allergyintolerance = (props) => {
-    const allergy = Events.dataType.codeableConcept(props.entry.substance, "http://snomed.info/sct"),
+    const category = Events.value.capitalize(props.entry.category),
+        status = Events.value.capitalize(props.entry.status),
+        allergy = Events.dataType.codeableConcept(props.entry.substance, "http://snomed.info/sct"),
         criticality = Events.value.criticality(props.entry.criticality);
 
     return <Card key={props.index} style={{ marginBottom: '10px' }}>
@@ -386,16 +398,19 @@ Events.main.allergyintolerance = (props) => {
             justifyContent: 'space-between',
             alignItems: 'center'
         }}>
-            <Card.Text style={{ margin: '0' }}>{props.entry.resourceType || "N/A"}</Card.Text>
-            <Card.Text style={{ margin: '0' }}>{props.entry.category || "N/A"}</Card.Text>
-            <Card.Text style={{ margin: '0' }}>{props.entry.status || "N/A"}</Card.Text>
+            {category ? (
+                <Card.Text style={{ margin: '0' }}>{`Allergies: ${category}`}</Card.Text>
+            ) : (
+                <Card.Text style={{ margin: '0' }}>Allergies</Card.Text>
+            )}
+            <Card.Text style={{ margin: '0' }}>{`Status: ${status || "N/A"}`}</Card.Text>
         </Card.Header>
         <Card.Body 
             as={ListGroup}
             style={{ padding: "0" }}
         >
-            {allergy ? <Card.Text as={ListGroupItem}>{`Allergy: ${allergy}`}</Card.Text> : null }
-            {criticality ? <Card.Text as={ListGroupItem}>{`Risk: ${criticality}`}</Card.Text> : null }
+            {allergy ? <Card.Text as={ListGroupItem} style={{ textAlign: 'left' }}>{`Allergy: ${allergy}`}</Card.Text> : null }
+            {criticality ? <Card.Text as={ListGroupItem} style={{ textAlign: 'left' }}>{`Risk: ${criticality}`}</Card.Text> : null }
         </Card.Body>
     </Card>
 }
@@ -411,16 +426,16 @@ Events.main.patient = (props) => {
             justifyContent: 'space-between',
             alignItems: 'center'
         }}>
-            <Card.Text style={{ margin: '0' }}>{props.entry.resourceType || "N/A"}</Card.Text>
+            <Card.Text style={{ margin: '0' }}>Patient</Card.Text>
         </Card.Header>
         <Card.Body 
             as={ListGroup}
             style={{ padding: "0" }}
         >
-            {address ? <Card.Text as={ListGroupItem}>{`Address: ${address}`}</Card.Text> : null }
+            {address ? <Card.Text as={ListGroupItem} style={{ textAlign: 'left' }}>{`Address: ${address}`}</Card.Text> : null }
             {telecom ? telecom.map(com => {
                 const use = Events.value.capitalize(com.use);
-                return <Card.Text as={ListGroupItem}>{`${use}: ${com.value}`}</Card.Text>
+                return <Card.Text as={ListGroupItem} style={{ textAlign: 'left' }}>{`${use}: ${com.value}`}</Card.Text>
             }) : null }
         </Card.Body>
     </Card>
@@ -440,19 +455,24 @@ Events.main.relatedperson = (props) => {
             justifyContent: 'space-between',
             alignItems: 'center'
         }}>
-            <Card.Text style={{ margin: '0' }}>{props.entry.resourceType || "N/A"}</Card.Text>
-            <Card.Text style={{ margin: '0' }}>{name || "N/A"}</Card.Text>
-            <Card.Text style={{ margin: '0' }}>{`Gender: ${gender || "N/A"}`}</Card.Text>
-            <Card.Text style={{ margin: '0' }}>{`DoB: ${birthDate || "N/A"}`}</Card.Text>
+            {name ? (
+                <Card.Text style={{ margin: '0' }}>{`Relatives: ${name}`}</Card.Text>
+            ) : (
+                <Card.Text style={{ margin: '0' }}>Relatives</Card.Text>
+            )}
+            <div style={{ display: 'flex' }}>
+                <Card.Text style={{ margin: '0' }}>{`Gender: ${gender || "N/A"}`}</Card.Text>
+                <Card.Text style={{ margin: '0 0 0 8px' }}>{`DOB: ${birthDate || "N/A"}`}</Card.Text>
+            </div>
         </Card.Header>
         <Card.Body 
             as={ListGroup}
             style={{ padding: "0" }}
         >
-            {address ? <Card.Text as={ListGroupItem}>{`Address: ${address || "N/A"}`}</Card.Text> : null }
+            {address ? <Card.Text as={ListGroupItem} style={{ textAlign: 'left' }}>{`Address: ${address || "N/A"}`}</Card.Text> : null }
             {telecom ? telecom.map(com => {
                 const use = Events.value.capitalize(com.use);
-                return <Card.Text as={ListGroupItem}>{`${use}: ${com.value}`}</Card.Text>
+                return <Card.Text as={ListGroupItem} style={{ textAlign: 'left' }}>{`${use}: ${com.value}`}</Card.Text>
             }) : null }
         </Card.Body>
     </Card>

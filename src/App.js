@@ -46,9 +46,9 @@ export default class App extends React.Component {
       AccountIndex: 0,
       AccountArray: [
         { 
-          label: "Account",
+          label: "Patient",
           value: "Patient",
-          path: "/account"
+          path: "/patient"
         } , {
           label: "Relatives",
           value: "RelatedPerson",

@@ -8,7 +8,7 @@ import {
 import Events from './Events';
 import Header from './Component/Header';
 import Cards from './Component/Cards';
-import Table from './Component/Table';
+import Main from './Component/Main';
 import LaunchPatient from './Component/Launch/LaunchPatient';
 
 export default class App extends React.Component {
@@ -165,7 +165,7 @@ export default class App extends React.Component {
                     <h1>Error Retrieveing Data</h1>
                   </div>
               ) : (
-                <Table
+                <Main
                   Cerner={Cerner}
                   DisplayCount={DisplayCount}
                   DisplayIndex={DisplayIndex}

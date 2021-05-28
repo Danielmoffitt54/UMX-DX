@@ -1,9 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import {
-    CardColumns,
     CardDeck,
-    CardGroup,
-    Container,
     Card
 } from 'react-bootstrap';
 

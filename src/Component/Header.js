@@ -113,7 +113,7 @@ function SubHeader(props) {
                         className="list-group-flush"
                         style={{ flexDirection: "row" }}>
                         <ListGroupItem style={{ border: 'none' }}>{`Gender: ${Events.value.capitalize(props.Patient.gender)}`}</ListGroupItem>
-                        <ListGroupItem>{`DoB: ${Events.value.date(props.Patient.birthDate)}`}</ListGroupItem>
+                        <ListGroupItem>{`DoB: ${Events.dataType.date(props.Patient.birthDate)}`}</ListGroupItem>
                     </ListGroup>
                 </Card.Body>
             </Card>

@@ -16,6 +16,7 @@ const Header = (props) => {
         {!props.Oauth2 ? (
             <Navbar style={{ justifyContent: 'space-between' }}>
                 <Navbar.Brand
+                    style={{ marginLeft: '12vw' }}
                     as={NavLink}
                     to="/"
                     onClick={() => props.SetAppState({
@@ -27,6 +28,7 @@ const Header = (props) => {
                     })}
                 >UMX-DX App</Navbar.Brand>
                 <NavDropdown
+                    style={{ marginRight: '12vw' }}
                     title="Login"
                     id="navbarScrollingDropdown"
                 >
@@ -36,6 +38,7 @@ const Header = (props) => {
         ) : (
             <Navbar style={{ justifyContent: 'space-between' }}>
                 <Navbar.Brand
+                    style={{ marginLeft: '12vw' }}
                     as={NavLink}
                     to="/"
                     onClick={() => props.SetAppState({
@@ -47,6 +50,7 @@ const Header = (props) => {
                     })}
                 >UMX-DX App</Navbar.Brand>
                 <NavDropdown
+                    style={{ marginRight: '12vw' }}
                     title="Menu"
                     id="navbarScrollingDropdown"
                 >

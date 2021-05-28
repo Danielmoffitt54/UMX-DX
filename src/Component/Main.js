@@ -18,7 +18,10 @@ const Main = (props) => {
 
     if (Display.length > 0) console.log("Display: ", Display);
 
-    return <Container>
+    return <Container
+        style={{ padding: '0' }}
+        fluid
+    >
       <Container>
         {Display.map((entry, index) => {
           return Events.main[Type]({

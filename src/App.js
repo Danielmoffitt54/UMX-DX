@@ -10,6 +10,7 @@ import Header from './Component/Header';
 import Cards from './Component/Cards';
 import Main from './Component/Main';
 import LaunchPatient from './Component/Launch/LaunchPatient';
+import Spinner from 'react-bootstrap/Spinner'
 
 export default class App extends React.Component {
   constructor(props) {
@@ -25,19 +26,19 @@ export default class App extends React.Component {
       DisplayCount: 25,
       MainIndex: 0,
       MainArray: [
-        { 
+        {
           label: "Observations",
           value: "Observation",
           path: "/observations"
-        } , {
+        }, {
           label: "Conditions",
           value: "Condition",
           path: "/conditions"
-        } , {
+        }, {
           label: "Medications",
           value: "MedicationStatement",
           path: "/medications"
-        } , {
+        }, {
           label: "Allergies",
           value: "AllergyIntolerance",
           path: "/allergies"
@@ -45,11 +46,11 @@ export default class App extends React.Component {
       ],
       AccountIndex: 0,
       AccountArray: [
-        { 
+        {
           label: "Patient",
           value: "Patient",
           path: "/patient"
-        } , {
+        }, {
           label: "Relatives",
           value: "RelatedPerson",
           path: "/relatives"
@@ -90,7 +91,7 @@ export default class App extends React.Component {
         SetAppState: this.SetAppState
       });
     }
-    <Redirect to={props.option.path}/>
+    <Redirect to={props.option.path} />
   }
 
   componentDidMount() {
@@ -124,7 +125,7 @@ export default class App extends React.Component {
 
     return <div className="App">
       <Router basename="/UMX-DX">
-        <GetHeader 
+        <GetHeader
           AllOptions={AllOptions}
           Dropdown={Dropdown}
           Oauth2={Oauth2}
@@ -144,6 +145,9 @@ export default class App extends React.Component {
             {Loading ? (
               <div className="App-Loading">
                 <h1>Please wait...</h1>
+                <Spinner animation="border" role="status">
+                  <span className="sr-only">Loading...</span>
+                </Spinner>
               </div>
             ) : (
               !Oauth2 ? (
@@ -155,25 +159,28 @@ export default class App extends React.Component {
           </Route>
           {AllOptions.map((option, index) => {
             return <Route key={index} path={option.path}>
-            {Loading ? (
-              <div className="App-Loading">
-                <h1>Please wait...</h1>
-              </div>
-            ) : (
-              !Cerner || Cerner.length === 0 ? (
+              {Loading ? (
+                <div className="App-Loading">
+                  <h1>Please wait...</h1>
+                  <Spinner animation="border" role="status">
+                    <span className="sr-only">Loading...</span>
+                  </Spinner>
+                </div>
+              ) : (
+                !Cerner || Cerner.length === 0 ? (
                   <div className="App-Error">
                     <h1>Error Retrieveing Data</h1>
                   </div>
-              ) : (
-                <Main
-                  Cerner={Cerner}
-                  DisplayCount={DisplayCount}
-                  DisplayIndex={DisplayIndex}
-                  CurrentPage={CurrentPage}
-                  SetAppState={this.SetAppState}
-                />
-              )
-            )}
+                ) : (
+                  <Main
+                    Cerner={Cerner}
+                    DisplayCount={DisplayCount}
+                    DisplayIndex={DisplayIndex}
+                    CurrentPage={CurrentPage}
+                    SetAppState={this.SetAppState}
+                  />
+                )
+              )}
             </Route>
           })}
           {!Oauth2 ? (
@@ -182,14 +189,14 @@ export default class App extends React.Component {
                 <LaunchPatient />
               </Route>
             </>
-          ) : null }
+          ) : null}
         </Switch>
         {!Loading && Oauth2 ? (
-          <Cards 
+          <Cards
             AllOptions={AllOptions}
             RedirectRoute={this.RedirectRoute}
           />
-        ) : null }
+        ) : null}
       </Router>
     </div>
   }
@@ -208,7 +215,7 @@ function GetHeader(props) {
 
   switch (true) {
     case includedAccount:
-      return <Header 
+      return <Header
         AllOptions={props.AllOptions}
         Dropdown={props.Dropdown}
         Oauth2={props.Oauth2}
@@ -225,7 +232,7 @@ function GetHeader(props) {
         SetAppState={props.SetAppState}
       />
     default:
-      return <Header 
+      return <Header
         AllOptions={props.AllOptions}
         Dropdown={props.Dropdown}
         Oauth2={props.Oauth2}

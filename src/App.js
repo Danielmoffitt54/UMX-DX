@@ -10,7 +10,7 @@ import Header from './Component/Header';
 import Cards from './Component/Cards';
 import Main from './Component/Main';
 import LaunchPatient from './Component/Launch/LaunchPatient';
-import Spinner from 'react-bootstrap/Spinner'
+// import Spinner from 'react-bootstrap/Spinner'
 
 export default class App extends React.Component {
   constructor(props) {
@@ -145,9 +145,9 @@ export default class App extends React.Component {
             {Loading ? (
               <div className="App-Loading">
                 <h1>Please wait...</h1>
-                <Spinner animation="border" role="status">
+                {/* <Spinner animation="border" role="status">
                   <span className="sr-only">Loading...</span>
-                </Spinner>
+                </Spinner> */}
               </div>
             ) : (
               !Oauth2 ? (
@@ -162,9 +162,9 @@ export default class App extends React.Component {
               {Loading ? (
                 <div className="App-Loading">
                   <h1>Please wait...</h1>
-                  <Spinner animation="border" role="status">
+                  {/* <Spinner animation="border" role="status">
                     <span className="sr-only">Loading...</span>
-                  </Spinner>
+                  </Spinner> */}
                 </div>
               ) : (
                 !Cerner || Cerner.length === 0 ? (

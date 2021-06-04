@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/UMX-DX/static/css/main.9bb4aab5.chunk.css",
+    "main.css": "/UMX-DX/static/css/main.f5e95a67.chunk.css",
     "main.js": "/UMX-DX/static/js/main.cee48795.chunk.js",
     "main.js.map": "/UMX-DX/static/js/main.cee48795.chunk.js.map",
     "runtime-main.js": "/UMX-DX/static/js/runtime-main.70f6b6cb.js",
@@ -10,13 +10,13 @@
     "static/js/3.23c98ad9.chunk.js": "/UMX-DX/static/js/3.23c98ad9.chunk.js",
     "static/js/3.23c98ad9.chunk.js.map": "/UMX-DX/static/js/3.23c98ad9.chunk.js.map",
     "index.html": "/UMX-DX/index.html",
-    "static/css/main.9bb4aab5.chunk.css.map": "/UMX-DX/static/css/main.9bb4aab5.chunk.css.map",
+    "static/css/main.f5e95a67.chunk.css.map": "/UMX-DX/static/css/main.f5e95a67.chunk.css.map",
     "static/js/2.c797c6e7.chunk.js.LICENSE.txt": "/UMX-DX/static/js/2.c797c6e7.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.70f6b6cb.js",
     "static/js/2.c797c6e7.chunk.js",
-    "static/css/main.9bb4aab5.chunk.css",
+    "static/css/main.f5e95a67.chunk.css",
     "static/js/main.cee48795.chunk.js"
   ]
 }

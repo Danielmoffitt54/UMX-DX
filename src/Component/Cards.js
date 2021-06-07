@@ -1,14 +1,17 @@
 import { NavLink } from 'react-router-dom';
 import {
-    CardDeck,
+    Container,
     Card
 } from 'react-bootstrap';
 
 const Cards = (props) => {
 
-    return <CardDeck className="d-flex justify-content-around align-items-center flex-wrap m-4">
+    return <Container 
+        className="d-flex justify-content-around align-items-center flex-wrap"
+        fluid
+    >
         {props.AllOptions.map((option, i) => {
-            return <Card border="primary" className="text-center p-4" style={{height: '75px', width: '200px'}} >
+            return <Card border="primary" className="text-center p-4 m-2" style={{height: '75px', width: '200px'}} >
                 <NavLink key={i} 
                     to={option.path}
                     onClick={() => props.RedirectRoute({
@@ -18,7 +21,7 @@ const Cards = (props) => {
                 >{option.label}</NavLink>
             </Card>
         })}
-    </CardDeck>
+    </Container>
 }
 
 export default Cards;

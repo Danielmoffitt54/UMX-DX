@@ -24,6 +24,17 @@ body {
   justify-content: center;
 }
 
+/* Header Styling */
+.Header-SubNav-Link {
+  display: none;
+}
+
+@include media-breakpoint-up(md) {
+  .Header-SubNav-Link {
+    display: block;
+  }
+}
+
 /* Table Footer Styling */
 .Footer-Nav {
   margin: 0;

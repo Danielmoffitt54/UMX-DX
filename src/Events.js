@@ -484,7 +484,7 @@ Events.value = {};
 Events.value.backbone = (obj) => {
     if (!obj) return null;
     const code = Events.dataType.codeableConcept(obj.code),
-        value = Events.dataType.multiValue(obj.value, 'value'),
+        value = Events.value.multiValue(obj.value, 'value'),
         absent = Events.dataType.codeableConcept(obj.dataAbsentReason),
         inter = Events.dataType.codeableConcept(obj.interpretation),
         type = Events.dataType.codeableConcept(obj.type),
@@ -582,16 +582,16 @@ Events.value.multiValue = (obj, base) => {
 Events.value.telecom = (array) => {
     const used = [],
         out = [];
-    let phone = null;
+    // let phone = null;
     
     array.forEach(com => {
         if (!com.system || !com.value) return
-        phone = Events.dataType.phone(com.value);
-        if (used.includes(phone) || used.includes(com.value)) return
+        // phone = Events.dataType.phone(com.value);
+        if (used.includes(com.value)) return
 
         switch (com.system) {
             case 'phone':
-                used.push(phone);
+                used.push(com.value);
                 return out.push(com);
             case 'email':
                 used.push(com.value);
@@ -673,14 +673,21 @@ Events.dataType.period = (obj) => {
 }
 
 Events.dataType.phone = (str) => {
-    if (typeof str !== 'string') return null
-    // const regex = /^[0-9]/;
-    // let out = str.replace(regex, "");
-    // str.split("");
-    // out.splice(6, 0, ".");
-    // out.splice(3, 0, ".");
-    // return out.join("");
-    return str
+    if (typeof str !== 'string') return null;
+    let out = str.replaceAll("^[0-9]*$","");
+    if (out.length < 10 || out.length > 11) return null;
+    out = out.split("");
+    if (out.length === 10) {
+        out.splice(6, 0, "-");
+        out.splice(3, 0, ") ");
+        out.unshift("(");
+    } else if (out.length === 11) {
+        out.splice(7, 0, "-");
+        out.splice(4, 0, ") ");
+        out.splice(1, 0, " (");
+    }
+    console.log("Phone: ", out);
+    return out.join("");
 }
 
 Events.dataType.quantity = (obj) => {

@@ -58,6 +58,7 @@ const Header = (props) => {
                         return <NavDropdown.Item 
                             key={i}
                             as={NavLink}
+                            className="Header-SubNav-Link"
                             to={option.path}
                             onClick={() => {
                                 props.SetAppState({ Loading: true });
